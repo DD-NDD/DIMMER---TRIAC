@@ -1,0 +1,89 @@
+#include <main.h>
+#include <stdint.h>
+#byte OPTION_REG = GETENV("SFR:OPTION_REG")
+#bit  INTEDG = OPTION_REG.6
+int1 ZC = 0;
+unsigned int16 level[10] = {9000,8000,7000,6000,5000,4000,3000,2000,1000,0};
+unsigned int16 cur_level = 0;
+unsigned int8 i=0;
+int keycount=0;
+ 
+signed int8 debounce_counter_C0;
+#INT_EXT
+void  EXT_isr(void) 
+{
+   
+   ZC = 1;
+   if(INTEDG) INTEDG = 0;
+  else       INTEDG = 1;
+}
+void led_display(uint8_t level)
+{
+   switch(level)
+   {
+      case 0: {output_c(0x00); output_low(LED9);  output_high(LED10); break;}
+      case 1: {output_c(0x00); output_high(LED9);  output_high(LED10); break;}
+      case 2: {output_c(0x01); output_high(LED9);  output_high(LED10); break;}
+      case 3: {output_c(0x03); output_high(LED9);  output_high(LED10); break;}
+      case 4: {output_c(0x07); output_high(LED9);  output_high(LED10); break;}
+      case 5: {output_c(0x0f); output_high(LED9);  output_high(LED10); break;}
+      case 6: {output_c(0x8f); output_high(LED9);  output_high(LED10); break;}
+      case 7: {output_c(0xCf); output_high(LED9);  output_high(LED10); break;}
+      case 8: {output_c(0xEf); output_high(LED9);  output_high(LED10); break;}
+      case 9: {output_c(0xff); output_high(LED9);  output_high(LED10); break;}
+      default: break;
+   }
+}
+
+
+
+void main()
+{
+
+   enable_interrupts(INT_EXT);
+   enable_interrupts(GLOBAL);
+
+   while(TRUE)
+   {
+      if (!input(BT1) && input(BT3)==1)
+      {
+         delay_us(200);
+         if (input(BT1)) break;
+         else {
+             if (keycount++ == 20) {
+                 i++;
+             }
+         }
+      }
+      if (!input(BT3))
+      {
+         delay_us(200);
+         if (input(BT1)) break;
+         else {
+             if (keycount++ == 20) {
+                 i--;
+             }
+         }
+      }
+      else if(input(BT2) == 0) // phai
+      {
+         //i = 5;
+      }
+      else if(input(BT4) == 0) // trai
+      {
+         //i = 2;
+      }
+      
+      if(i>8) i = 8;
+      led_display(i);
+      if(ZC == 1)
+      {
+         delay_us(level[i]);
+         output_high(TRIAC);
+         delay_us(100);
+         output_low(TRIAC);
+         ZC = 0;
+      }
+   }
+
+}

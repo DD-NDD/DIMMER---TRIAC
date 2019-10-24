@@ -1,0 +1,89 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=PIC16F886
+CCSVerions=5.051
+Compiler=PCM
+CCSVersion=5.051
+[Target Data]
+FileList=main.c
+[Directories]
+Include=
+[C:\Users\Duy Ngo\Desktop\DO AN THUE\Code\main]
+Type=4
+[mru-list]
+1=main.c
+
+[ProjectLog]
+Days=2
+D1=23-10-2019
+D1_L=4
+D1_L1=[78020]Project Opened.
+D1_L2=[78040]Started Editing.
+D1_L3=[79621]Stopped Editing.
+TotalEdit=208
+TotalDebug=0
+D1_E=27
+D1_D=0
+D1_L4=[79621]Project Closed.
+D2=24-10-2019
+D2_L=36
+D2_L1=[32528]Project Opened.
+D2_L2=[32562]Started Editing.
+D2_L3=[33482]Stopped Editing.
+D2_L4=[33487]Started Editing.
+D2_L5=[33901]Stopped Editing.
+D2_E=181
+D2_D=0
+D2_L6=[33901]Project Closed.
+D2_L7=[33930]Project Opened.
+D2_L8=[33943]Started Editing.
+D2_L9=[38542]Stopped Editing.
+D2_L10=[38652]Started Editing.
+D2_L11=[39287]Stopped Editing.
+D2_L12=[39287]Project Closed.
+D2_L13=[39313]Project Opened.
+D2_L14=[39321]Project Closed.
+D2_L15=[39322]Project Opened.
+D2_L16=[39337]Project Closed.
+D2_L17=[39339]Project Opened.
+D2_L18=[39341]Project Closed.
+D2_L19=[39341]Project Opened.
+D2_L20=[39343]Project Closed.
+D2_L21=[39361]Project Opened.
+D2_L22=[39364]Project Closed.
+D2_L23=[39365]Project Opened.
+D2_L24=[39368]Project Closed.
+D2_L25=[39371]Project Opened.
+D2_L26=[39373]Project Closed.
+D2_L27=[39374]Project Opened.
+D2_L28=[39422]Started Editing.
+D2_L29=[40399]Stopped Editing.
+D2_L30=[40399]Project Closed.
+D2_L31=[62659]Project Opened.
+D2_L32=[62902]Started Editing.
+D2_L33=[64638]Stopped Editing.
+D2_L34=[64781]Started Editing.
+D2_L35=[67085]Stopped Editing.
+D2_L36=[67085]Project Closed.
+
+[Opened Files]
+1=main.c
+t1=113
+Count=3
+2=main.h
+t2=1
+3=switch.c
+t3=1
+[main.c]
+Type=4
+
+[defines]
+buildcount=125
+
+[ExtraIncludes]
+Count=2
+1=main=c:\users\duy ngo\desktop\do an thue\code\switch.c
+2=main=c:\users\duy ngo\desktop\do an thue\code\switch.h
+[Units]
+Count=1
+1=main (main)

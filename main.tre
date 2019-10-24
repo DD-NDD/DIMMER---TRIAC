@@ -1,0 +1,15 @@
+ÀÄmain
+   ÃÄMAIN  0/224  Ram=12
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ@GET_TICKS_1  0/76  Ram=1
+   ³  ÃÄled_display  0/83  Ram=1
+   ³  ÃÄ@GET_TICKS_1  0/76  Ram=1
+   ³  ÃÄGetTickDifference  0/24  Ram=8
+   ³  ÃÄtick  0/92  Ram=1
+   ³  ³  ÃÄ@delay_ms1  0/20  Ram=1
+   ³  ³  ÀÄ@delay_ms1  0/20  Ram=1
+   ³  ÃÄcheck_limit  0/16  Ram=1
+   ³  ÃÄled_display  0/83  Ram=1
+   ³  ÃÄ@delay_us1  0/17  Ram=1
+   ³  ÀÄ@delay_us1  0/17  Ram=1
+   ÀÄEXT_isr  0/12  Ram=0

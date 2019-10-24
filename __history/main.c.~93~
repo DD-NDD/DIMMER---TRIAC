@@ -1,0 +1,81 @@
+#include <main.h>
+#include <stdint.h>
+#byte OPTION_REG = GETENV("SFR:OPTION_REG")
+#bit  INTEDG = OPTION_REG.6
+int1 ZC = 0;
+unsigned int16 level[10] = {9000,8000,7000,6000,5000,4000,3000,2000,1000,0};
+unsigned int8 i=0;
+int keycount=0;
+#define UP_SWITCH_PIN       PIN_B2
+#define BT2   PIN_B3
+#define DOWN_SWITCH_PIN     PIN_B4
+#define REC_SWITCH_PIN      PIN_B5
+
+#include "switch.h"
+#include "switch.c"
+
+#int_rtcc
+void rtcc_isr(void)
+{
+set_rtcc(RTCC_PRESET);
+
+update_switch_status();   // Poll the switches
+}
+#INT_EXT
+void  EXT_isr(void) 
+{
+   
+   ZC = 1;
+   if(INTEDG) INTEDG = 0;
+  else       INTEDG = 1;
+}
+void led_display(uint8_t level)
+{
+   switch(level)
+   {
+      case 0: {output_c(0x00); output_low(LED9);  output_high(LED10); break;}
+      case 1: {output_c(0x00); output_high(LED9);  output_high(LED10); break;}
+      case 2: {output_c(0x01); output_high(LED9);  output_high(LED10); break;}
+      case 3: {output_c(0x03); output_high(LED9);  output_high(LED10); break;}
+      case 4: {output_c(0x07); output_high(LED9);  output_high(LED10); break;}
+      case 5: {output_c(0x0f); output_high(LED9);  output_high(LED10); break;}
+      case 6: {output_c(0x8f); output_high(LED9);  output_high(LED10); break;}
+      case 7: {output_c(0xCf); output_high(LED9);  output_high(LED10); break;}
+      case 8: {output_c(0xEf); output_high(LED9);  output_high(LED10); break;}
+      case 9: {output_c(0xff); output_high(LED9);  output_high(LED10); break;}
+      default: break;
+   }
+}
+
+
+
+void main()
+{
+   gc_old_switch_status = read_switches();
+   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_256);
+   set_rtcc(RTCC_PRESET);
+   clear_interrupt(INT_RTCC);
+   enable_interrupts(INT_EXT);
+   enable_interrupts(GLOBAL);
+
+   while(TRUE)
+   {
+   
+      if((rec_button == SW_HELD))
+      i = 0;
+      else if(up_button == SW_PRESSED)
+         i++;
+      else if(down_button == SW_PRESSED)
+         i--;
+      led_display(i);
+      if(ZC == 1)
+      {
+         delay_us(level[5]);
+         output_high(TRIAC);
+         delay_us(100);
+         output_low(TRIAC);
+         ZC = 0;
+      }
+   }
+
+}
